@@ -1,0 +1,6 @@
+{
+  "title": "Transportaanvraag verstuurd | OKT Logistics",
+  "description": "Bevestiging na het versturen van uw transportaanvraag aan OKT Logistics.",
+  "main": "<main><section class=\"section\"><div class=\"container\"><div class=\"section-head\"><h1>Uw transportaanvraag</h1><p data-confirmation>U kunt via het contactformulier een transportaanvraag indienen.</p></div><a class=\"btn btn-blue\" href=\"contact.html\">Naar contact</a></div></section></main>",
+  "type": "hidden"
+}
