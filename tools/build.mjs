@@ -61,7 +61,7 @@ const slug=from.replace(/^\/|\/$/g,'').replaceAll('/','--');if(!slug||pages.some
 fs.writeFileSync(path.join(pub,slug+'.html'),`<!doctype html><html lang="nl"><head><meta charset="utf-8"><meta name="robots" content="noindex,follow"><meta http-equiv="refresh" content="0;url=${to}"><link rel="canonical" href="${site.domain}${to}"><title>Pagina verplaatst | OKT Logistics</title></head><body><p>Deze informatie staat op <a href="${to}">de bijgewerkte pagina</a>.</p></body></html>`);
 }
 fs.writeFileSync(path.join(pub,'sitemap.xml'),'<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">'+pages.filter(p=>!['hidden','draft'].includes(p.type)).map(p=>`<url><loc>${esc(site.domain+clean(p.slug))}</loc>${p.lastModified?`<lastmod>${p.lastModified}</lastmod>`:''}</url>`).join('')+'</urlset>');
-fs.writeFileSync(path.join(pub,'robots.txt'),`User-agent: *\nAllow: /\nDisallow: /api/\nSitemap: ${site.domain}/sitemap.xml\n`);
+fs.writeFileSync(path.join(pub,'robots.txt'),`User-agent: *\nDisallow: /api/\nSitemap: ${site.domain}/sitemap.xml\n`);
 fs.writeFileSync(path.join(pub,'favicon.svg'),'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><rect width="64" height="64" rx="12" fill="#243E85"/><text x="32" y="41" text-anchor="middle" font-family="Arial,sans-serif" font-size="25" font-weight="bold" fill="white">OKT</text></svg>');
 return finishSeo(root,pages,site);
 }

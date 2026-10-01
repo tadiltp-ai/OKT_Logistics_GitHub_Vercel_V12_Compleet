@@ -8,6 +8,16 @@ const serial=o=>JSON.stringify(o).replace(/</g,'\\u003c');
 const nlRoute=slug=>slug==='index'?'/':`/${slug}/`;
 export function finishSeo(root,pages,site){
  const pub=path.join(root,'public'),dimensions=JSON.parse(fs.readFileSync(path.join(root,'tools/image-dimensions.json'),'utf8'));
+ const entityGraph=(schemas,p,route,lang)=>{
+  const org=schemas.find(s=>[].concat(s['@type']).includes('Organization'));
+  org.identifier={'@type':'PropertyValue',propertyID:'KvK',value:site.kvk};
+  const website={'@context':'https://schema.org','@type':'WebSite','@id':site.domain+'/#website',url:site.domain+'/',name:site.name,inLanguage:['nl-NL','en-GB'],publisher:{'@id':org['@id']}};
+  const existing=schemas.find(s=>s['@type']==='WebSite');if(existing)Object.assign(existing,website);else schemas.push(website);
+  const pageType=['over-ons','/en/about-us/'].includes(p.slug||route)?'AboutPage':['contact','/en/contact/'].includes(p.slug||route)?'ContactPage':'WebPage';
+  schemas.push({'@context':'https://schema.org','@type':pageType,'@id':site.domain+route+'#webpage',url:site.domain+route,name:p.title,description:p.description,inLanguage:lang==='en'?'en-GB':'nl-NL',isPartOf:{'@id':website['@id']},about:{'@id':org['@id']},publisher:{'@id':org['@id']}});
+  for(const service of schemas.filter(s=>s['@type']==='Service')){service['@id']=site.domain+route+'#service';service.url=site.domain+route;service.provider={'@id':org['@id']};}
+  return schemas;
+ };
  const pairFor=slug=>englishPages.find(p=>p.nl===slug);
  const alternate=(slug,xml=false)=>{const p=pairFor(slug);if(!p)return '';return [['nl',nlRoute(slug)],['en',p.route],['x-default',nlRoute(slug)]].map(([lang,route])=>xml?`<xhtml:link rel="alternate" hreflang="${lang}" href="${site.domain}${route}"/>`:`<link rel="alternate" hreflang="${lang}" href="${site.domain}${route}">`).join('');};
  const images=html=>{let index=0;return html.replace(/<img\b[^>]*>/g,tag=>{
@@ -34,7 +44,7 @@ export function finishSeo(root,pages,site){
    const faq=[...html.matchAll(/<details[^>]*>\s*<summary[^>]*>([\s\S]*?)<\/summary>([\s\S]*?)<\/details>/g)].map(m=>({'@type':'Question',name:plain(m[1]),acceptedAnswer:{'@type':'Answer',text:plain(m[2])}}));
    if(faq.length)schemas.push({'@context':'https://schema.org','@type':'FAQPage',mainEntity:faq});
    if(route!=='/'&&!schemas.some(s=>s['@type']==='BreadcrumbList'))schemas.push({'@context':'https://schema.org','@type':'BreadcrumbList',itemListElement:[{'@type':'ListItem',position:1,name:'Home',item:site.domain+(lang==='en'?'/en/':'/')},{'@type':'ListItem',position:2,name:p.title.split('|')[0].trim(),item:site.domain+route}]});
-   return `<script type="application/ld+json">${serial(schemas)}</script>`;
+   return `<script type="application/ld+json">${serial(entityGraph(schemas,p,route,lang))}</script>`;
   });
  }
  for(const p of pages){
@@ -75,8 +85,8 @@ export function finishSeo(root,pages,site){
   head=head.replace(/(<meta (?:property="og:image:alt"|name="twitter:image:alt") content=")[^"]*/g,'$1'+photoAlt);
   const org=JSON.parse(head.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/)[1])[0];
   const schemas=[org,{'@context':'https://schema.org','@type':'BreadcrumbList',itemListElement:[{'@type':'ListItem',position:1,name:'Home',item:site.domain+'/en/'},...(p.nl==='index'?[]:[{'@type':'ListItem',position:2,name:p.h1,item:site.domain+p.route}])]}];
-  if(['koeltransport','vriestransport','internationaal-koeltransport'].includes(p.nl))schemas.push({'@context':'https://schema.org','@type':'Service',name:p.h1,description:p.description,url:site.domain+p.route,provider:{'@id':site.domain+'/#organization'}});
-  head=head.replace(/<script type="application\/ld\+json">[\s\S]*?<\/script>/,`<script type="application/ld+json">${serial(schemas)}</script>`);
+  if(['koeltransport','vriestransport','internationaal-koeltransport','koeltransport-duitsland','koeltransport-belgie','koeltransport-frankrijk'].includes(p.nl))schemas.push({'@context':'https://schema.org','@type':'Service',name:p.h1,description:p.description,url:site.domain+p.route,provider:{'@id':site.domain+'/#organization'}});
+  head=head.replace(/<script type="application\/ld\+json">[\s\S]*?<\/script>/,`<script type="application/ld+json">${serial(entityGraph(schemas,p,p.route,'en'))}</script>`);
   const dialog='<dialog id="cookie-dialog" aria-labelledby="cookie-heading"><h2 id="cookie-heading">Your privacy preferences</h2><p>We store your choice. Analytics load only when configured and with your consent.</p><div class="form-actions"><button type="button" class="btn btn-secondary" data-cookie="essential">Essential only</button><button type="button" class="btn btn-blue" data-cookie="analytics">Allow analytics</button><button type="button" class="btn btn-secondary" data-cookie-close>Close</button></div></dialog>';
   const html=assets(images(head+'<body>'+header+main+footer+dialog+'</body></html>'));
   const slug=p.route.slice(1,-1).replaceAll('/','--');fs.writeFileSync(path.join(pub,slug+'.html'),html);
