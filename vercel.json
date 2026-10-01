@@ -2,5 +2,140 @@
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "framework": null,
   "buildCommand": "npm test && npm run build:vercel",
-  "installCommand": "echo No external dependencies"
+  "installCommand": "echo No external dependencies",
+  "redirects": [
+    {
+      "source": "/diepvriestransport",
+      "destination": "/vriestransport/",
+      "permanent": true
+    },
+    {
+      "source": "/diepvriestransport/",
+      "destination": "/vriestransport/",
+      "permanent": true
+    },
+    {
+      "source": "/levensmiddelen-transport",
+      "destination": "/food-transport/",
+      "permanent": true
+    },
+    {
+      "source": "/levensmiddelen-transport/",
+      "destination": "/food-transport/",
+      "permanent": true
+    },
+    {
+      "source": "/contact-us",
+      "destination": "/contact/",
+      "permanent": true
+    },
+    {
+      "source": "/contact-us/",
+      "destination": "/contact/",
+      "permanent": true
+    },
+    {
+      "source": "/about-us",
+      "destination": "/over-ons/",
+      "permanent": true
+    },
+    {
+      "source": "/about-us/",
+      "destination": "/over-ons/",
+      "permanent": true
+    },
+    {
+      "source": "/services",
+      "destination": "/diensten/",
+      "permanent": true
+    },
+    {
+      "source": "/services/",
+      "destination": "/diensten/",
+      "permanent": true
+    },
+    {
+      "source": "/portfolio",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/portfolio/",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/home",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/home/",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/nl",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/nl/",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/en",
+      "destination": "/en/",
+      "permanent": true
+    },
+    {
+      "source": "/transport",
+      "destination": "/diensten/",
+      "permanent": true
+    },
+    {
+      "source": "/transport/",
+      "destination": "/diensten/",
+      "permanent": true
+    }
+  ],
+  "headers": [
+    {
+      "source": "/assets/:path*",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
+    },
+    {
+      "source": "/style.css",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
+    },
+    {
+      "source": "/improvements.css",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
+    },
+    {
+      "source": "/site.js",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
+    }
+  ]
 }

@@ -1,4 +1,11 @@
 {
   "/diepvriestransport/": "/vriestransport/",
-  "/levensmiddelen-transport/": "/food-transport/"
+  "/levensmiddelen-transport/": "/food-transport/",
+  "/contact-us/": "/contact/",
+  "/about-us/": "/over-ons/",
+  "/services/": "/diensten/",
+  "/portfolio/": "/",
+  "/home/": "/",
+  "/nl/": "/",
+  "/transport/": "/diensten/"
 }

@@ -2,12 +2,32 @@
   "name": "OKT Logistics BV",
   "domain": "https://www.oktlogisticholland.com",
   "email": "operations@okttrans.nl",
-  "phone": "+31 6 409 16 156",
+  "phone": "+31 412 250 014",
   "office": "+31 412 250 014",
   "address": "Honsdijk 1",
   "postcode": "5364 NL",
   "city": "Escharen",
   "kvk": "97914037",
   "vat": "NL868286667B01",
-  "logo": "assets/logo-192.webp"
+  "logo": "assets/logo-192.webp",
+  "sameAs": [
+    "https://www.linkedin.com/company/okt-logistic-holland"
+  ],
+  "geo": null,
+  "openingHoursSpecification": [
+    {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": [
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday",
+        "Sunday"
+      ],
+      "opens": "00:00",
+      "closes": "23:59"
+    }
+  ]
 }

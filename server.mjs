@@ -66,13 +66,13 @@ export function createApp({env=process.env,mailFetch=fetch,now=Date.now}={}){
   function redirect(target){res.writeHead(301,{Location:target+url.search});res.end();}
   let decoded;try{decoded=decodeURIComponent(route);}catch{return json(400,{error:'Ongeldig pad.'});}
   if(decoded.includes('\\')||decoded.includes('\0'))return json(400,{error:'Ongeldig pad.'});
-  const file=decoded==='/'?'index.html':decoded.endsWith('/')?decoded.slice(1,-1)+'.html':decoded.slice(1);
+  const file=decoded==='/'?'index.html':decoded.endsWith('/')?decoded.slice(1,-1).replaceAll('/','--')+'.html':decoded.slice(1);
   const absolute=path.resolve(publicDir,file);let status=200,target=absolute;
   if(!absolute.startsWith(publicDir+path.sep)||!fs.existsSync(absolute)||!fs.statSync(absolute).isFile()){status=404;target=path.join(publicDir,'404.html');}
-  const ext=path.extname(target);const mime={'.html':'text/html;charset=utf-8','.css':'text/css;charset=utf-8','.js':'application/javascript;charset=utf-8','.webp':'image/webp','.svg':'image/svg+xml','.xml':'application/xml;charset=utf-8','.txt':'text/plain;charset=utf-8'};
+  const ext=path.extname(target);const mime={'.html':'text/html;charset=utf-8','.css':'text/css;charset=utf-8','.js':'application/javascript;charset=utf-8','.webp':'image/webp','.svg':'image/svg+xml','.xml':'application/xml;charset=utf-8','.txt':'text/plain;charset=utf-8','.png':'image/png','.webmanifest':'application/manifest+json'};
   let bytes=fs.readFileSync(target);
   if(ext==='.html'){
-   let content=bytes.toString().replace('<head>','<head><base href="/">');
+   let content=bytes.toString(); if(!content.includes('<base '))content=content.replace('<head>','<head><base href="/">');
    content=content.replace(/href="([a-z0-9-]+)\.html(#[^"]*)?"/g,(_,slug,hash)=>`href="${slug==='index'?'/':'/'+slug+'/'}${hash||''}"`);
    // Fragment-only links must remain on the current route despite the shared asset base.
    content=content.replace(/href="#([^"]+)"/g,(_,hash)=>`href="${escape(route)}#${hash}"`);
@@ -86,7 +86,7 @@ export function createApp({env=process.env,mailFetch=fetch,now=Date.now}={}){
    const q=gzip?.slice(1).find(v=>v.trim().startsWith('q='));
    if(gzip&&(!q||Number(q.trim().slice(2))>0)){bytes=gzipSync(bytes);res.setHeader('Content-Encoding','gzip');}
   }
-  res.writeHead(status,{'Content-Type':mime[ext]||'application/octet-stream','Cache-Control':ext==='.html'?'no-cache':'public, max-age=3600','Content-Length':bytes.length});
+  res.writeHead(status,{'Content-Type':mime[ext]||'application/octet-stream','Cache-Control':ext==='.html'?'no-cache':(pathname.startsWith('/assets/')||['.css','.js'].includes(ext))?'public, max-age=31536000, immutable':'public, max-age=3600','Content-Length':bytes.length});
   res.end(req.method==='HEAD'?undefined:bytes);
  });
 }

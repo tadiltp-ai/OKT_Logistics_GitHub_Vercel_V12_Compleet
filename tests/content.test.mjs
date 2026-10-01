@@ -24,11 +24,13 @@ test('all local links, anchors and responsive images exist; commercial pages wit
   const s=fs.readFileSync(path.join(pub,p.slug+'.html'),'utf8'),targets=[];
   for(const m of s.matchAll(/(?:href|src)="([^"]*)"/g)){
    const ref=m[1].replace(/&amp;/g,'&');if(/^(?:[a-z]+:|\/\/)/i.test(ref))continue;
-   const u=new URL(ref,'http://local/'+p.slug+'.html'),filename=decodeURIComponent(u.pathname.slice(1)),target=path.join(pub,filename);
+   const u=new URL(ref,'http://local/'+p.slug+'.html');let filename=decodeURIComponent(u.pathname.slice(1));
+   if(!filename)filename='index.html';else if(filename.endsWith('/'))filename=filename.slice(0,-1).replaceAll('/','--')+'.html';
+   const target=path.join(pub,filename);
    assert.ok(fs.existsSync(target),`${p.slug}: ${ref}`);
    if(filename.endsWith('.html')){targets.push(filename.slice(0,-5));if(u.hash){const t=fs.readFileSync(target,'utf8');assert.ok(t.includes(`id="${u.hash.slice(1)}"`),`${p.slug}: ${ref}`);}}
   }
-  for(const m of s.matchAll(/srcset="([^"]*)"/g))for(const variant of m[1].split(','))assert.ok(fs.existsSync(path.join(pub,variant.trim().split(' ')[0])));
+  for(const m of s.matchAll(/srcset="([^"]*)"/g))for(const variant of m[1].split(','))assert.ok(fs.existsSync(path.join(pub,variant.trim().split(' ')[0].split('?')[0])));
   graph.set(p.slug,targets);
  }
  const distances=new Map([['index',0]]),queue=['index'];

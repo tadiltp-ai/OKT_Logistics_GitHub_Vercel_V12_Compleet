@@ -1,7 +1,7 @@
 export function normalizePageRoute(route){
  if(route==='/index.html'||route==='/index/'||route==='/index')return '/';
  if(route.endsWith('.html'))return route.slice(0,-5)+'/';
- if(/^\/[a-z0-9-]+$/.test(route))return route+'/';
+ if(/^\/(?:[a-z0-9-]+\/)*[a-z0-9-]+$/.test(route))return route+'/';
  return route;
 }
 export function prepareRedirects(input){

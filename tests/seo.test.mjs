@@ -4,6 +4,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import {root} from '../tools/build.mjs';
 import {prepareRedirects} from '../tools/routes.mjs';
+import {englishPages} from '../tools/english.mjs';
 test('redirect chains flatten and invalid destinations and cycles are rejected',()=>{
  assert.deepEqual(prepareRedirects({'/oud.html':'/tussen/','/tussen/':'/nieuw/'}),{'/oud/':'/nieuw/','/tussen/':'/nieuw/'});
  for(const input of [{'/a/':'/a/'},{'/a/':'/b/','/b/':'/a/'},{'/a/':'https://other.example/'}])assert.throws(()=>prepareRedirects(input));
@@ -18,6 +19,7 @@ test('sitemap matches indexable content and canonical/social URLs',()=>{
   assert.match(html,/<meta name="twitter:image"/);
   if(!['hidden','draft'].includes(p.type))expected.push(url);
  }
+ expected.push(...englishPages.map(p=>site.domain+p.route));
  const actual=[...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map(m=>m[1]);assert.deepEqual(actual.sort(),expected.sort());
  assert.ok(fs.readFileSync(path.join(root,'public/robots.txt'),'utf8').includes('Sitemap: '+site.domain+'/sitemap.xml'));
 });

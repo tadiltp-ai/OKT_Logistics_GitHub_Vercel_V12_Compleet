@@ -1,0 +1,414 @@
+{
+  "apple-touch-icon.png": [
+    180,
+    180
+  ],
+  "favicon-32.png": [
+    32,
+    32
+  ],
+  "icon-192.png": [
+    192,
+    192
+  ],
+  "icon-512.png": [
+    512,
+    512
+  ],
+  "assets/fleet-1-4k-1280.webp": [
+    1280,
+    577
+  ],
+  "assets/fleet-1-4k-1920.webp": [
+    1920,
+    865
+  ],
+  "assets/fleet-1-4k-640.webp": [
+    640,
+    288
+  ],
+  "assets/fleet-2-4k-1280.webp": [
+    1280,
+    577
+  ],
+  "assets/fleet-2-4k-1920.webp": [
+    1920,
+    865
+  ],
+  "assets/fleet-2-4k-640.webp": [
+    640,
+    288
+  ],
+  "assets/fleet-3-4k-1280.webp": [
+    1280,
+    577
+  ],
+  "assets/fleet-3-4k-1920.webp": [
+    1920,
+    865
+  ],
+  "assets/fleet-3-4k-640.webp": [
+    640,
+    288
+  ],
+  "assets/food-ai-v10-1280.webp": [
+    1280,
+    720
+  ],
+  "assets/food-ai-v10-1920.webp": [
+    1920,
+    1081
+  ],
+  "assets/food-ai-v10-3840.webp": [
+    3840,
+    2161
+  ],
+  "assets/food-ai-v10-640.webp": [
+    640,
+    360
+  ],
+  "assets/groupage-ai-v10-1280.webp": [
+    1280,
+    720
+  ],
+  "assets/groupage-ai-v10-1920.webp": [
+    1920,
+    1081
+  ],
+  "assets/groupage-ai-v10-3840.webp": [
+    3840,
+    2161
+  ],
+  "assets/groupage-ai-v10-640.webp": [
+    640,
+    360
+  ],
+  "assets/homepage-1281e037a5-1254.webp": [
+    1254,
+    1254
+  ],
+  "assets/homepage-1281e037a5-640.webp": [
+    640,
+    640
+  ],
+  "assets/homepage-d8a6127171-1127.webp": [
+    1127,
+    607
+  ],
+  "assets/homepage-d8a6127171-640.webp": [
+    640,
+    345
+  ],
+  "assets/homepage-lineage-1280.webp": [
+    1280,
+    591
+  ],
+  "assets/homepage-lineage-1920.webp": [
+    1920,
+    886
+  ],
+  "assets/homepage-lineage-3840.webp": [
+    3840,
+    1772
+  ],
+  "assets/homepage-lineage-640.webp": [
+    640,
+    295
+  ],
+  "assets/homepage-lineage-960.webp": [
+    960,
+    443
+  ],
+  "assets/kwaliteit-ai-v10-1280.webp": [
+    1280,
+    720
+  ],
+  "assets/kwaliteit-ai-v10-1920.webp": [
+    1920,
+    1081
+  ],
+  "assets/kwaliteit-ai-v10-3840.webp": [
+    3840,
+    2161
+  ],
+  "assets/kwaliteit-ai-v10-640.webp": [
+    640,
+    360
+  ],
+  "assets/logo-192.webp": [
+    192,
+    192
+  ],
+  "assets/okt-distributiecentrum-v10-1280.webp": [
+    1280,
+    577
+  ],
+  "assets/okt-distributiecentrum-v10-1920.webp": [
+    1920,
+    865
+  ],
+  "assets/okt-distributiecentrum-v10-3840.webp": [
+    3840,
+    1731
+  ],
+  "assets/okt-distributiecentrum-v10-640.webp": [
+    640,
+    288
+  ],
+  "assets/okt-dock-overzicht-v10-1280.webp": [
+    1280,
+    504
+  ],
+  "assets/okt-dock-overzicht-v10-1920.webp": [
+    1920,
+    756
+  ],
+  "assets/okt-dock-overzicht-v10-3840.webp": [
+    3840,
+    1513
+  ],
+  "assets/okt-dock-overzicht-v10-640.webp": [
+    640,
+    252
+  ],
+  "assets/okt-koelcentrum-v10-1280.webp": [
+    1280,
+    533
+  ],
+  "assets/okt-koelcentrum-v10-1920.webp": [
+    1920,
+    800
+  ],
+  "assets/okt-koelcentrum-v10-3840.webp": [
+    3840,
+    1600
+  ],
+  "assets/okt-koelcentrum-v10-640.webp": [
+    640,
+    267
+  ],
+  "assets/okt-koeltrailer-v10-1280.webp": [
+    1280,
+    480
+  ],
+  "assets/okt-koeltrailer-v10-1920.webp": [
+    1920,
+    721
+  ],
+  "assets/okt-koeltrailer-v10-3840.webp": [
+    3840,
+    1441
+  ],
+  "assets/okt-koeltrailer-v10-640.webp": [
+    640,
+    240
+  ],
+  "assets/okt-koeltrailer-v13-1280.webp": [
+    1280,
+    577
+  ],
+  "assets/okt-koeltrailer-v13-640.webp": [
+    640,
+    288
+  ],
+  "assets/okt-koeltrailer-v13-960.webp": [
+    960,
+    433
+  ],
+  "assets/okt-laaddock-v10-1280.webp": [
+    1280,
+    581
+  ],
+  "assets/okt-laaddock-v10-1920.webp": [
+    1920,
+    871
+  ],
+  "assets/okt-laaddock-v10-3840.webp": [
+    3840,
+    1743
+  ],
+  "assets/okt-laaddock-v10-640.webp": [
+    640,
+    290
+  ],
+  "assets/okt-laadlocatie-v13-1280.webp": [
+    1280,
+    577
+  ],
+  "assets/okt-laadlocatie-v13-1920.webp": [
+    1920,
+    865
+  ],
+  "assets/okt-laadlocatie-v13-640.webp": [
+    640,
+    288
+  ],
+  "assets/okt-laadlocatie-v13-960.webp": [
+    960,
+    433
+  ],
+  "assets/okt-onderweg-v13-1280.webp": [
+    1280,
+    577
+  ],
+  "assets/okt-onderweg-v13-640.webp": [
+    640,
+    288
+  ],
+  "assets/okt-onderweg-v13-960.webp": [
+    960,
+    433
+  ],
+  "assets/okt-truck-v10-1280.webp": [
+    1280,
+    643
+  ],
+  "assets/okt-truck-v10-1920.webp": [
+    1920,
+    964
+  ],
+  "assets/okt-truck-v10-3840.webp": [
+    3840,
+    1929
+  ],
+  "assets/okt-truck-v10-640.webp": [
+    640,
+    321
+  ],
+  "assets/okt-truck-v13-1280.webp": [
+    1280,
+    576
+  ],
+  "assets/okt-truck-v13-1920.webp": [
+    1920,
+    864
+  ],
+  "assets/okt-truck-v13-640.webp": [
+    640,
+    288
+  ],
+  "assets/okt-truck-v13-960.webp": [
+    960,
+    432
+  ],
+  "assets/okt-waddinxveen-v13-1280.webp": [
+    1280,
+    576
+  ],
+  "assets/okt-waddinxveen-v13-1920.webp": [
+    1920,
+    864
+  ],
+  "assets/okt-waddinxveen-v13-640.webp": [
+    640,
+    288
+  ],
+  "assets/okt-waddinxveen-v13-960.webp": [
+    960,
+    432
+  ],
+  "assets/okt-wuppertal-v13-1280.webp": [
+    1280,
+    576
+  ],
+  "assets/okt-wuppertal-v13-1920.webp": [
+    1920,
+    864
+  ],
+  "assets/okt-wuppertal-v13-640.webp": [
+    640,
+    288
+  ],
+  "assets/okt-wuppertal-v13-960.webp": [
+    960,
+    432
+  ],
+  "assets/okt-zijaanzicht-v10-1280.webp": [
+    1280,
+    577
+  ],
+  "assets/okt-zijaanzicht-v10-1920.webp": [
+    1920,
+    865
+  ],
+  "assets/okt-zijaanzicht-v10-3840.webp": [
+    3840,
+    1731
+  ],
+  "assets/okt-zijaanzicht-v10-640.webp": [
+    640,
+    288
+  ],
+  "assets/over-ons-trailer-1280.webp": [
+    1280,
+    801
+  ],
+  "assets/over-ons-trailer-1920.webp": [
+    1920,
+    1201
+  ],
+  "assets/over-ons-trailer-3840.webp": [
+    3840,
+    2402
+  ],
+  "assets/over-ons-trailer-640.webp": [
+    640,
+    400
+  ],
+  "assets/over-ons-vriezer-1280.webp": [
+    1280,
+    862
+  ],
+  "assets/over-ons-vriezer-1920.webp": [
+    1920,
+    1293
+  ],
+  "assets/over-ons-vriezer-3840.webp": [
+    3840,
+    2586
+  ],
+  "assets/over-ons-vriezer-640.webp": [
+    640,
+    431
+  ],
+  "assets/truck-hero-1127.webp": [
+    1127,
+    607
+  ],
+  "assets/truck-hero-640.webp": [
+    640,
+    345
+  ],
+  "assets/truck-secondary-1280.webp": [
+    1280,
+    643
+  ],
+  "assets/truck-secondary-1304.webp": [
+    1304,
+    655
+  ],
+  "assets/truck-secondary-640.webp": [
+    640,
+    321
+  ],
+  "assets/geconditioneerd-waddinxveen-v13-640.webp": [
+    640,
+    270
+  ],
+  "assets/geconditioneerd-waddinxveen-v13-960.webp": [
+    960,
+    405
+  ],
+  "assets/geconditioneerd-waddinxveen-v13-1280.webp": [
+    1280,
+    540
+  ],
+  "assets/geconditioneerd-waddinxveen-v13-1920.webp": [
+    1920,
+    809
+  ],
+  "assets/geconditioneerd-waddinxveen-v13-3840.webp": [
+    3840,
+    1619
+  ]
+}
