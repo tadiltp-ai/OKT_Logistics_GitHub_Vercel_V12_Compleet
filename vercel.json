@@ -85,11 +85,6 @@
       "permanent": true
     },
     {
-      "source": "/en",
-      "destination": "/en/",
-      "permanent": true
-    },
-    {
       "source": "/transport",
       "destination": "/diensten/",
       "permanent": true
@@ -97,6 +92,241 @@
     {
       "source": "/transport/",
       "destination": "/diensten/",
+      "permanent": true
+    },
+    {
+      "source": "/copy-of-home",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/copy-of-home/",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/copy-of-diepvries-transport",
+      "destination": "/vriestransport/",
+      "permanent": true
+    },
+    {
+      "source": "/copy-of-diepvries-transport/",
+      "destination": "/vriestransport/",
+      "permanent": true
+    },
+    {
+      "source": "/copy-of-internationaal-transport",
+      "destination": "/internationaal-koeltransport/",
+      "permanent": true
+    },
+    {
+      "source": "/copy-of-internationaal-transport/",
+      "destination": "/internationaal-koeltransport/",
+      "permanent": true
+    },
+    {
+      "source": "/copy-of-internationaal-transport-1",
+      "destination": "/internationaal-koeltransport/",
+      "permanent": true
+    },
+    {
+      "source": "/copy-of-internationaal-transport-1/",
+      "destination": "/internationaal-koeltransport/",
+      "permanent": true
+    },
+    {
+      "source": "/copy-of-geconditioneerd-transport",
+      "destination": "/geconditioneerd-transport/",
+      "permanent": true
+    },
+    {
+      "source": "/copy-of-geconditioneerd-transport/",
+      "destination": "/geconditioneerd-transport/",
+      "permanent": true
+    },
+    {
+      "source": "/en/copy-of-home",
+      "destination": "/en/",
+      "permanent": true
+    },
+    {
+      "source": "/en/copy-of-home/",
+      "destination": "/en/",
+      "permanent": true
+    },
+    {
+      "source": "/en/contact-us",
+      "destination": "/en/contact/",
+      "permanent": true
+    },
+    {
+      "source": "/en/contact-us/",
+      "destination": "/en/contact/",
+      "permanent": true
+    },
+    {
+      "source": "/en/transport",
+      "destination": "/en/services/",
+      "permanent": true
+    },
+    {
+      "source": "/en/transport/",
+      "destination": "/en/services/",
+      "permanent": true
+    },
+    {
+      "source": "/en/portfolio",
+      "destination": "/en/",
+      "permanent": true
+    },
+    {
+      "source": "/en/portfolio/",
+      "destination": "/en/",
+      "permanent": true
+    },
+    {
+      "source": "/en/copy-of-diepvries-transport",
+      "destination": "/en/frozen-transport/",
+      "permanent": true
+    },
+    {
+      "source": "/en/copy-of-diepvries-transport/",
+      "destination": "/en/frozen-transport/",
+      "permanent": true
+    },
+    {
+      "source": "/en/copy-of-internationaal-transport",
+      "destination": "/en/international-refrigerated-transport/",
+      "permanent": true
+    },
+    {
+      "source": "/en/copy-of-internationaal-transport/",
+      "destination": "/en/international-refrigerated-transport/",
+      "permanent": true
+    },
+    {
+      "source": "/en/copy-of-internationaal-transport-1",
+      "destination": "/en/international-refrigerated-transport/",
+      "permanent": true
+    },
+    {
+      "source": "/en/copy-of-internationaal-transport-1/",
+      "destination": "/en/international-refrigerated-transport/",
+      "permanent": true
+    },
+    {
+      "source": "/en/copy-of-geconditioneerd-transport",
+      "destination": "/en/refrigerated-transport/",
+      "permanent": true
+    },
+    {
+      "source": "/en/copy-of-geconditioneerd-transport/",
+      "destination": "/en/refrigerated-transport/",
+      "permanent": true
+    },
+    {
+      "source": "/tr/copy-of-home",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/tr/copy-of-home/",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/tr/contact-us",
+      "destination": "/contact/",
+      "permanent": true
+    },
+    {
+      "source": "/tr/contact-us/",
+      "destination": "/contact/",
+      "permanent": true
+    },
+    {
+      "source": "/tr/about-us",
+      "destination": "/over-ons/",
+      "permanent": true
+    },
+    {
+      "source": "/tr/about-us/",
+      "destination": "/over-ons/",
+      "permanent": true
+    },
+    {
+      "source": "/tr/transport",
+      "destination": "/diensten/",
+      "permanent": true
+    },
+    {
+      "source": "/tr/transport/",
+      "destination": "/diensten/",
+      "permanent": true
+    },
+    {
+      "source": "/tr/portfolio",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/tr/portfolio/",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/tr/copy-of-diepvries-transport",
+      "destination": "/vriestransport/",
+      "permanent": true
+    },
+    {
+      "source": "/tr/copy-of-diepvries-transport/",
+      "destination": "/vriestransport/",
+      "permanent": true
+    },
+    {
+      "source": "/tr/copy-of-internationaal-transport",
+      "destination": "/internationaal-koeltransport/",
+      "permanent": true
+    },
+    {
+      "source": "/tr/copy-of-internationaal-transport/",
+      "destination": "/internationaal-koeltransport/",
+      "permanent": true
+    },
+    {
+      "source": "/tr/copy-of-internationaal-transport-1",
+      "destination": "/internationaal-koeltransport/",
+      "permanent": true
+    },
+    {
+      "source": "/tr/copy-of-internationaal-transport-1/",
+      "destination": "/internationaal-koeltransport/",
+      "permanent": true
+    },
+    {
+      "source": "/tr/copy-of-geconditioneerd-transport",
+      "destination": "/geconditioneerd-transport/",
+      "permanent": true
+    },
+    {
+      "source": "/tr/copy-of-geconditioneerd-transport/",
+      "destination": "/geconditioneerd-transport/",
+      "permanent": true
+    },
+    {
+      "source": "/tr",
+      "destination": "/en/",
+      "permanent": true
+    },
+    {
+      "source": "/tr/",
+      "destination": "/en/",
+      "permanent": true
+    },
+    {
+      "source": "/en",
+      "destination": "/en/",
       "permanent": true
     }
   ],

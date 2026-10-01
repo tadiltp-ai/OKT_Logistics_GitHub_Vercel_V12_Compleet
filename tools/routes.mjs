@@ -7,7 +7,8 @@ export function normalizePageRoute(route){
 export function prepareRedirects(input){
  const result={};
  for(const [from,to] of Object.entries(input)){
-  if(!/^\/(?:[a-z0-9-]+\/?|[a-z0-9-]+\.html)?$/.test(from)||typeof to!=='string'||!/^\/(?:[a-z0-9-]+\/?|[a-z0-9-]+\.html)?$/.test(to))throw Error('Redirects moeten lokale pagina-adressen zijn.');
+  const localRoute=/^\/(?:[a-z0-9-]+\/)*(?:[a-z0-9-]+(?:\/|\.html)?)?$/;
+  if(!localRoute.test(from)||typeof to!=='string'||!localRoute.test(to))throw Error('Redirects moeten lokale pagina-adressen zijn.');
   const key=normalizePageRoute(from),target=normalizePageRoute(to);
   if(Object.hasOwn(result,key)&&result[key]!==target)throw Error('Dubbele redirect: '+key);
   result[key]=target;

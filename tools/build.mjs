@@ -1,6 +1,7 @@
 import fs from 'node:fs';
 import {finishSeo} from './seo.mjs';
 import {prepareRedirects} from './routes.mjs';
+import {englishPages} from './english.mjs';
 import path from 'node:path';
 import {fileURLToPath} from 'node:url';
 import crypto from 'node:crypto';
@@ -14,7 +15,8 @@ const redirects=prepareRedirects(JSON.parse(fs.readFileSync(path.join(dir,'redir
 const pages=fs.readdirSync(dir).filter(x=>x.endsWith('.json')&&!['site.json','redirects.json'].includes(x)).map(x=>({slug:x.slice(0,-5),...JSON.parse(fs.readFileSync(path.join(dir,x),'utf8'))}));
 for(const p of pages)for(const key of ['lastModified','datePublished'])if(p[key]&&(!/^\d{4}-\d{2}-\d{2}$/.test(p[key])||!Number.isFinite(Date.parse(p[key]))||new Date(p[key]).toISOString().slice(0,10)!==p[key]))throw Error('Ongeldige datum: '+p.slug+' '+key);
 const clean=slug=>slug==='index'?'/':`/${slug}/`;
-for(const [from,to] of Object.entries(redirects)){if(pages.some(p=>clean(p.slug)===from))throw Error('Redirect overschrijft bestaande pagina: '+from);if(!pages.some(p=>clean(p.slug)===to))throw Error('Redirectdoel bestaat niet: '+to);}
+const pageRoutes=new Set([...pages.map(p=>clean(p.slug)),...englishPages.map(p=>p.route)]);
+for(const [from,to] of Object.entries(redirects)){if(pageRoutes.has(from))throw Error('Redirect overschrijft bestaande pagina: '+from);if(!pageRoutes.has(to))throw Error('Redirectdoel bestaat niet: '+to);}
 const nav=[['diensten','Diensten'],['landen','Landen'],['kwaliteit','Kwaliteit'],['over-ons','Over ons'],['kennisbank','Kennisbank'],['contact','Contact']];
 const footerLinks=items=>items.map(([slug,title])=>`<a href="${slug}.html">${title}</a>`).join('');
 const footer=`<footer class="footer"><div class="container"><div class="footer-grid"><div><div class="logo-foot"><img src="${site.logo}" width="48" height="48" loading="lazy" alt=""><strong>${esc(site.name)}</strong></div><p>Internationaal koel- en vriestransport.<br>Direct contact, duidelijke afspraken.</p><p>KvK ${esc(site.kvk)}<br>BTW ${esc(site.vat)}</p></div><div><h2>Diensten</h2><div class="footer-links">${footerLinks([['koeltransport','Koeltransport'],['vriestransport','Vriestransport'],['geconditioneerd-transport','Geconditioneerd transport'],['internationaal-koeltransport','Internationaal koeltransport'],['internationaal-vriestransport','Internationaal vriestransport'],['groupage-koeltransport','Groupage'],['food-transport','Food en levensmiddelen']])}</div></div><div><h2>OKT Logistics</h2><div class="footer-links">${footerLinks([['koeltransport-duitsland','Duitsland'],['koeltransport-belgie','België'],['koeltransport-frankrijk','Frankrijk'],['kwaliteit','Kwaliteit'],['over-ons','Over ons'],['kennisbank','Kennisbank'],['algemene-voorwaarden','Algemene voorwaarden'],['privacy','Privacy'],['cookies','Cookies']])}<button type="button" data-cookie-open>Cookievoorkeur</button></div></div><div><h2>Contact</h2><p>${esc(site.address)}<br>${esc(site.postcode)} ${esc(site.city)}</p><p><a href="tel:${site.phone.replace(/ /g,'')}">${esc(site.phone)}</a></p><a href="mailto:${site.email}">${esc(site.email)}</a></div></div><div class="copy">© ${new Date().getFullYear()} ${esc(site.name)}</div></div></footer>`;
@@ -55,9 +57,8 @@ const versioned=html.replace(/(href|src)="(style\.css|improvements\.css|site\.js
 fs.writeFileSync(path.join(pub,p.slug+'.html'),versioned);
 }
 for(const [from,to] of Object.entries(redirects)){
-const slug=from.replace(/^\/|\/$/g,'');if(!slug||pages.some(p=>p.slug===slug))continue;
-const target=to==='/'?'index':to.replace(/^\/|\/$/g,'');
-fs.writeFileSync(path.join(pub,slug+'.html'),`<!doctype html><html lang="nl"><head><meta charset="utf-8"><meta name="robots" content="noindex,follow"><meta http-equiv="refresh" content="0;url=${target}.html"><link rel="canonical" href="${site.domain}${to}"><title>Pagina verplaatst | OKT Logistics</title></head><body><p>Deze informatie staat op <a href="${target}.html">de bijgewerkte pagina</a>.</p></body></html>`);
+const slug=from.replace(/^\/|\/$/g,'').replaceAll('/','--');if(!slug||pages.some(p=>p.slug===slug))continue;
+fs.writeFileSync(path.join(pub,slug+'.html'),`<!doctype html><html lang="nl"><head><meta charset="utf-8"><meta name="robots" content="noindex,follow"><meta http-equiv="refresh" content="0;url=${to}"><link rel="canonical" href="${site.domain}${to}"><title>Pagina verplaatst | OKT Logistics</title></head><body><p>Deze informatie staat op <a href="${to}">de bijgewerkte pagina</a>.</p></body></html>`);
 }
 fs.writeFileSync(path.join(pub,'sitemap.xml'),'<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">'+pages.filter(p=>!['hidden','draft'].includes(p.type)).map(p=>`<url><loc>${esc(site.domain+clean(p.slug))}</loc>${p.lastModified?`<lastmod>${p.lastModified}</lastmod>`:''}</url>`).join('')+'</urlset>');
 fs.writeFileSync(path.join(pub,'robots.txt'),`User-agent: *\nAllow: /\nDisallow: /api/\nSitemap: ${site.domain}/sitemap.xml\n`);

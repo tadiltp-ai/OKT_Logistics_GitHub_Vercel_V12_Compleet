@@ -7,6 +7,8 @@ import {prepareRedirects} from '../tools/routes.mjs';
 import {englishPages} from '../tools/english.mjs';
 test('redirect chains flatten and invalid destinations and cycles are rejected',()=>{
  assert.deepEqual(prepareRedirects({'/oud.html':'/tussen/','/tussen/':'/nieuw/'}),{'/oud/':'/nieuw/','/tussen/':'/nieuw/'});
+ assert.deepEqual(prepareRedirects({'/en/contact-us':'/en/contact/'}),{'/en/contact-us/':'/en/contact/'});
+ for(const bad of ['//evil.example/','/../secret','/en/../../secret','/en/contact?x=1'])assert.throws(()=>prepareRedirects({'/old/':bad}));
  for(const input of [{'/a/':'/a/'},{'/a/':'/b/','/b/':'/a/'},{'/a/':'https://other.example/'}])assert.throws(()=>prepareRedirects(input));
 });
 test('sitemap matches indexable content and canonical/social URLs',()=>{
