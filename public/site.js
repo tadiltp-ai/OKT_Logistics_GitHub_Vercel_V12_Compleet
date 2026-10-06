@@ -41,7 +41,7 @@ document.querySelectorAll('[data-quote-form]').forEach(form=>{
  });
  form.addEventListener('submit',async e=>{
   e.preventDefault();if(busy||!form.reportValidity())return;const d=getData(form);
-  if(!config.emailReady){location.href='mailto:operations@okttrans.nl?subject='+encodeURIComponent('Transportaanvraag '+d.pickup+' → '+d.delivery)+'&body='+encodeURIComponent(body(d));status.textContent='Uw e-mailprogramma is geopend met de ingevulde gegevens. Verstuur de e-mail daar zelf. Opent er niets? Download de aanvraag en mail deze naar operations@okttrans.nl.';return;}
+  if(!config.emailReady){location.href='mailto:aanvraag@okttrans.nl?subject='+encodeURIComponent('Transportaanvraag '+d.pickup+' → '+d.delivery)+'&body='+encodeURIComponent(body(d));status.textContent='Uw e-mailprogramma is geopend met de ingevulde gegevens. Verstuur de e-mail daar zelf. Opent er niets? Download de aanvraag en mail deze naar aanvraag@okttrans.nl.';return;}
   busy=true;submit.disabled=true;status.textContent='Uw aanvraag wordt verstuurd…';status.dataset.error='false';
   try{
    const res=await fetch('/api/quote',{method:'POST',headers:{'Content-Type':'application/json','X-Form-Token':token,'Idempotency-Key':requestId},body:JSON.stringify(d)});const result=await res.json();

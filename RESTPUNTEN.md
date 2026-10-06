@@ -27,7 +27,7 @@ De website is op basis van de briefing verder uitgewerkt. De goedgekeurde homepa
 | Onderdeel | Huidige status | Wat nog nodig is |
 |---|---|---|
 | Hosting en domein | Website werkt lokaal; niets is gepubliceerd | Hosting kiezen die de meegeleverde Node-server ondersteunt, HTTPS/reverse proxy instellen en domein koppelen. Voor Vercel is eerst aanpassing aan die hostingomgeving nodig. |
-| Rechtstreeks formulier versturen | Gebouwd en lokaal getest met een nagebootste e-maildienst; er is geen echte testmail verzonden | Een verzenddienstaccount, geverifieerd afzenderdomein, geheime API-sleutel en afzender instellen. Daarna ontvangst in operations@okttrans.nl daadwerkelijk testen. |
+| Rechtstreeks formulier versturen | Gebouwd en lokaal getest met een nagebootste e-maildienst; er is geen echte testmail verzonden | Een verzenddienstaccount, geverifieerd afzenderdomein, geheime API-sleutel en afzender instellen. Daarna ontvangst in aanvraag@okttrans.nl daadwerkelijk testen. |
 | Privacyverklaring | Duidelijk gemarkeerde conceptpagina, niet indexeerbaar | Vaststellen welke dienstverleners worden gebruikt, doeleinden, bewaartermijnen en rechten; definitieve tekst aanleveren/beoordelen. Daarna de online verzending activeren. |
 | Cookies | Cookiebediening aanwezig; analytics staan uit | Cookie-informatie afstemmen op de uiteindelijke diensten. |
 | Google Search Console en GA4 | Technische voorbereiding en overdracht aanwezig | Toegang tot de juiste accounts, eigendomscontrole, sitemap indienen en de gewenste conversies instellen/testen. Een GA4-code kan na inrichting worden toegevoegd. Google Tag Manager is niet apart gekoppeld. |

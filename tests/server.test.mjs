@@ -24,7 +24,7 @@ assert.equal((await fetch(base+'/api/quote',{method:'POST',headers:{...headers,O
 test('mail provider accepted and rejected paths with local mock only',async()=>{
 let sent;
 await app({env:{RESEND_API_KEY:'mock',MAIL_FROM:'sender@example.com',PRIVACY_READY:'true'},mailFetch:async(url,opts)=>{sent={url,...opts};return new Response(JSON.stringify({id:'local-mock-reference'}),{status:200});}},async({base,advance})=>{
-const headers=await prepare(base,advance);const r=await fetch(base+'/api/quote',{method:'POST',headers,body:JSON.stringify(valid)});assert.equal(r.status,200);assert.equal((await r.json()).reference,'local-mock-reference');const payload=JSON.parse(sent.body);assert.deepEqual(payload.to,['operations@okttrans.nl']);assert.equal(payload.reply_to,valid.email);assert.match(payload.text,/2099-01-01/);assert.equal(sent.headers['Idempotency-Key'],'okt-local-test-123456');});
+const headers=await prepare(base,advance);const r=await fetch(base+'/api/quote',{method:'POST',headers,body:JSON.stringify(valid)});assert.equal(r.status,200);assert.equal((await r.json()).reference,'local-mock-reference');const payload=JSON.parse(sent.body);assert.deepEqual(payload.to,['aanvraag@okttrans.nl']);assert.equal(payload.reply_to,valid.email);assert.match(payload.text,/2099-01-01/);assert.equal(sent.headers['Idempotency-Key'],'okt-local-test-123456');});
 await app({env:{RESEND_API_KEY:'mock',MAIL_FROM:'sender@example.com',PRIVACY_READY:'true'},mailFetch:async()=>new Response('{}',{status:500})},async({base,advance})=>{const headers=await prepare(base,advance);assert.equal((await fetch(base+'/api/quote',{method:'POST',headers,body:JSON.stringify(valid)})).status,502);});
 });
 
