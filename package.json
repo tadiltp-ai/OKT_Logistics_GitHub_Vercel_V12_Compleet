@@ -11,7 +11,8 @@
     "start": "node --env-file-if-exists=.env server.mjs",
     "beheer": "node tools/editor.mjs",
     "backup": "node tools/backup.mjs",
-    "test": "node --test --test-concurrency=1 tests/*.test.mjs",
+    "test": "node tools/build.mjs && node --test --test-concurrency=1 tests/*.test.mjs",
     "build:vercel": "node tools/build-vercel.mjs"
   }
 }
+
