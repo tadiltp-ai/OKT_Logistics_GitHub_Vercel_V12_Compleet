@@ -21,7 +21,8 @@ test('sitemap matches indexable content and canonical/social URLs',()=>{
   assert.match(html,/<meta name="twitter:image"/);
   if(!['hidden','draft'].includes(p.type))expected.push(url);
  }
- expected.push(...englishPages.map(p=>site.domain+p.route));
+ const languageRoutes=JSON.parse(fs.readFileSync(path.join(root,'tools/language-routes.json'),'utf8'));
+ for(const lang of ['en','de'])for(const [slug,route] of Object.entries(languageRoutes[lang])){const p=JSON.parse(fs.readFileSync(path.join(dir,slug+'.json'),'utf8'));if(!['hidden','draft'].includes(p.type))expected.push(site.domain+route);}
  const actual=[...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map(m=>m[1]);assert.deepEqual(actual.sort(),expected.sort());
  assert.ok(fs.readFileSync(path.join(root,'public/robots.txt'),'utf8').includes('Sitemap: '+site.domain+'/sitemap.xml'));
 });

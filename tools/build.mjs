@@ -1,5 +1,6 @@
 import fs from 'node:fs';
 import {finishSeo} from './seo.mjs';
+import {finishLanguages} from './languages.mjs';
 import {prepareRedirects} from './routes.mjs';
 import {englishPages} from './english.mjs';
 import path from 'node:path';
@@ -63,6 +64,7 @@ fs.writeFileSync(path.join(pub,slug+'.html'),`<!doctype html><html lang="nl"><he
 fs.writeFileSync(path.join(pub,'sitemap.xml'),'<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">'+pages.filter(p=>!['hidden','draft'].includes(p.type)).map(p=>`<url><loc>${esc(site.domain+clean(p.slug))}</loc>${p.lastModified?`<lastmod>${p.lastModified}</lastmod>`:''}</url>`).join('')+'</urlset>');
 fs.writeFileSync(path.join(pub,'robots.txt'),`User-agent: *\nDisallow: /api/\nSitemap: ${site.domain}/sitemap.xml\n`);
 fs.writeFileSync(path.join(pub,'favicon.svg'),'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><rect width="64" height="64" rx="12" fill="#243E85"/><text x="32" y="41" text-anchor="middle" font-family="Arial,sans-serif" font-size="25" font-weight="bold" fill="white">OKT</text></svg>');
-return finishSeo(root,pages,site);
+finishSeo(root,pages,site);
+return finishLanguages(root,pages,site);
 }
 if(process.argv[1]===fileURLToPath(import.meta.url))console.log(`Built ${build()} pages.`);

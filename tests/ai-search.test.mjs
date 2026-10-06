@@ -13,7 +13,7 @@ test('Dutch and English entity graphs connect pages, services and the same compa
   const canonical=html.match(/rel="canonical" href="([^"]+)"/)[1];
   assert.equal(page.url,canonical,file);assert.equal(page.about['@id'],org['@id'],file);
   assert.equal(org.identifier.value,'97914037');
-  assert.deepEqual(graph.find(x=>x['@type']==='WebSite').inLanguage,['nl-NL','en-GB']);
+  assert.deepEqual(graph.find(x=>x['@type']==='WebSite').inLanguage,['nl-NL','en-GB','de-DE']);
   for(const service of graph.filter(x=>x['@type']==='Service'))assert.equal(service.provider['@id'],org['@id']);
  }
  const robots=fs.readFileSync(path.join(root,'public/robots.txt'),'utf8');

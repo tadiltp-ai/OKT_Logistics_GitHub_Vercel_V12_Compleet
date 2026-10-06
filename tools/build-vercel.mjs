@@ -9,7 +9,7 @@ const fn=path.join(output,'functions/site.func'),staticDir=path.join(output,'sta
 fs.mkdirSync(fn,{recursive:true});fs.mkdirSync(staticDir,{recursive:true});
 for(const file of ['server.mjs','package.json'])fs.copyFileSync(path.join(root,file),path.join(fn,file));
 for(const folder of ['tools','content','public'])fs.mkdirSync(path.join(fn,folder),{recursive:true});
-for(const file of ['build.mjs','routes.mjs','seo.mjs','english.mjs','image-dimensions.json'])fs.copyFileSync(path.join(root,'tools',file),path.join(fn,'tools',file));
+for(const file of ['build.mjs','routes.mjs','seo.mjs','english.mjs','languages.mjs','language-routes.json','image-dimensions.json'])fs.copyFileSync(path.join(root,'tools',file),path.join(fn,'tools',file));
 for(const file of ['site.json','redirects.json'])fs.copyFileSync(path.join(root,'content',file),path.join(fn,'content',file));
 for(const file of fs.readdirSync(path.join(root,'public'))){
  const source=path.join(root,'public',file);
