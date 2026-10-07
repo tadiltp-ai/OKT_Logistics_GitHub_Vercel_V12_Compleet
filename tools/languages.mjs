@@ -10,6 +10,7 @@ export function finishLanguages(root,pages,site){
  const alt=(slug,xml=false)=>['nl','en','de','x-default'].map(l=>`<${xml?'xhtml:link':'link'} rel="alternate" hreflang="${l}" href="${site.domain+routes[l==='x-default'?'nl':l][slug]}"${xml?'/':''}>`).join('');
  const menu=(slug,lang)=>`<span class="language-switch" aria-label="${lang==='nl'?'Taal':lang==='de'?'Sprache':'Language'}">`+['nl','en','de'].map(l=>`<a href="${routes[l][slug]}" lang="${l}"${l===lang?' aria-current="true"':''}>${l.toUpperCase()}</a>`).join('')+'</span>';
  const version=f=>crypto.createHash('sha256').update(fs.readFileSync(path.join(pub,f))).digest('hex').slice(0,12);
+ const lastModified={};
  const originals={};
  for(const p of pages){
   const f=path.join(pub,p.slug+'.html');let h=fs.readFileSync(f,'utf8');
@@ -19,6 +20,7 @@ export function finishLanguages(root,pages,site){
  }
  for(const lang of ['en','de']){
   const data=JSON.parse(fs.readFileSync(path.join(root,'content/translations',lang+'.json'),'utf8'));
+  lastModified[lang]=data.lastModified||{};
   const translate=s=>data.strings[s]||s;
   const localize=value=>{
    if(Array.isArray(value))return value.map(localize);
@@ -32,6 +34,7 @@ export function finishLanguages(root,pages,site){
    h=h.replace(/<meta name="robots"[^>]*>/g,'').replace(/http:\/\/127\.0\.0\.1:8934/g,site.domain).replace(/href="\/nl\//g,'href="/');
    h=h.replace(/<span class="language-switch"[^>]*>[\s\S]*?<\/span>/,menu(p.slug,lang));
    h=h.replace(/\/site-(en|de)\.js\?v=[^"]+/g,(_,l)=>'/site-'+l+'.js?v='+version('site-'+l+'.js')).replace('href="/language-wrap.css"','href="/language-wrap.css?v='+version('language-wrap.css')+'"');
+   h=h.replace(/((?:src|href|srcset)="|, )(assets\/[^" ,]+)(?=[" ,])/g,(_,pre,ref)=>pre+ref+(ref.includes('?')?'':'?v='+version(ref)));
    const title=decode(h.match(/<title>(.*?)<\/title>/)[1]),description=decode(h.match(/<meta name="description" content="([^"]*)"/)[1]);
    const schema=JSON.parse(originals[p.slug].match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/)[1]).filter(s=>s['@type']!=='FAQPage').map(s=>{
     if([].concat(s['@type']).includes('Organization'))return s;
@@ -48,7 +51,7 @@ export function finishLanguages(root,pages,site){
    fs.writeFileSync(path.join(pub,route.slice(1,-1).replaceAll('/','--')+'.html'),h);
   }
  }
- const entries=pages.filter(p=>!['hidden','draft'].includes(p.type)).flatMap(p=>['nl','en','de'].map(l=>`<url><loc>${site.domain+routes[l][p.slug]}</loc><lastmod>${l==='nl'?p.lastModified:'2026-10-06'}</lastmod>${alt(p.slug,true)}</url>`));
+ const entries=pages.filter(p=>!['hidden','draft'].includes(p.type)).flatMap(p=>['nl','en','de'].map(l=>`<url><loc>${site.domain+routes[l][p.slug]}</loc><lastmod>${l==='nl'?p.lastModified:(lastModified[l][p.slug]||'2026-10-06')}</lastmod>${alt(p.slug,true)}</url>`));
  fs.writeFileSync(path.join(pub,'sitemap.xml'),'<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">\n'+entries.join('\n')+'\n</urlset>');
  return pages.length*3;
 }

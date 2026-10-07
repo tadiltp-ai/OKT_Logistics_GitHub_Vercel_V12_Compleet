@@ -32,7 +32,8 @@
     "transportofferte-informatie": "/de/angaben-transportangebot/",
     "vriestransport": "/de/tiefkuehltransport/",
     "wat-is-geconditioneerd-transport": "/de/was-ist-temperaturgefuehrter-transport/",
-    "wat-is-koeltransport": "/de/was-ist-kuehltransport/"
+    "wat-is-koeltransport": "/de/was-ist-kuehltransport/",
+    "bloementransport": "/de/blumentransport/"
   },
   "en": {
     "404": "/en/404/",
@@ -67,7 +68,8 @@
     "transportofferte-informatie": "/en/transport-quote-information/",
     "vriestransport": "/en/frozen-transport/",
     "wat-is-geconditioneerd-transport": "/en/what-is-temperature-controlled-transport/",
-    "wat-is-koeltransport": "/en/what-is-refrigerated-transport/"
+    "wat-is-koeltransport": "/en/what-is-refrigerated-transport/",
+    "bloementransport": "/en/flower-transport/"
   },
   "nl": {
     "404": "/404/",
@@ -102,6 +104,7 @@
     "transportofferte-informatie": "/transportofferte-informatie/",
     "vriestransport": "/vriestransport/",
     "wat-is-geconditioneerd-transport": "/wat-is-geconditioneerd-transport/",
-    "wat-is-koeltransport": "/wat-is-koeltransport/"
+    "wat-is-koeltransport": "/wat-is-koeltransport/",
+    "bloementransport": "/bloementransport/"
   }
 }

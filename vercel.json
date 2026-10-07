@@ -328,6 +328,46 @@
       "source": "/en",
       "destination": "/en/",
       "permanent": true
+    },
+    {
+      "source": "/bloemen-transport/",
+      "destination": "/bloementransport/",
+      "permanent": true
+    },
+    {
+      "source": "/bloemen-transport",
+      "destination": "/bloementransport/",
+      "permanent": true
+    },
+    {
+      "source": "/nl/bloemen-transport/",
+      "destination": "/bloementransport/",
+      "permanent": true
+    },
+    {
+      "source": "/nl/bloemen-transport",
+      "destination": "/bloementransport/",
+      "permanent": true
+    },
+    {
+      "source": "/tr/bloemen-transport/",
+      "destination": "/bloementransport/",
+      "permanent": true
+    },
+    {
+      "source": "/tr/bloemen-transport",
+      "destination": "/bloementransport/",
+      "permanent": true
+    },
+    {
+      "source": "/en/bloemen-transport/",
+      "destination": "/en/flower-transport/",
+      "permanent": true
+    },
+    {
+      "source": "/en/bloemen-transport",
+      "destination": "/en/flower-transport/",
+      "permanent": true
     }
   ],
   "headers": [
