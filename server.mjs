@@ -13,6 +13,10 @@ export function createApp({env=process.env,mailFetch=fetch,now=Date.now}={}){
  const site=JSON.parse(fs.readFileSync(path.join(root,'content/site.json'),'utf8'));
  const redirects=prepareRedirects(JSON.parse(fs.readFileSync(path.join(root,'content/redirects.json'),'utf8')));
  const emailReady=!!(env.RESEND_API_KEY&&env.MAIL_FROM&&env.PRIVACY_READY==='true'&&(!env.VERCEL||(env.FORM_TOKEN_SECRET?.length>=32&&env.PUBLIC_ORIGIN)));
+ if(!emailReady){
+  const missing=[!env.RESEND_API_KEY&&'RESEND_API_KEY',!env.MAIL_FROM&&'MAIL_FROM',env.PRIVACY_READY!=='true'&&'PRIVACY_READY',env.VERCEL&&!(env.FORM_TOKEN_SECRET?.length>=32)&&'FORM_TOKEN_SECRET (minimum 32 characters)',env.VERCEL&&!env.PUBLIC_ORIGIN&&'PUBLIC_ORIGIN'].filter(Boolean);
+  console.warn('Form mail configuration incomplete: '+missing.join(', '));
+ }
  const sign=time=>time+'.'+crypto.createHmac('sha256',secret).update(String(time)).digest('hex');
  function tokenValid(token){const [stamp,mac]=String(token||'').split('.');const age=now()-Number(stamp);if(!/^[a-f0-9]{64}$/.test(mac||'')||!Number.isFinite(age)||age<2000||age>7200000)return false;const expected=sign(stamp).split('.')[1];return mac.length===expected.length&&crypto.timingSafeEqual(Buffer.from(mac),Buffer.from(expected));}
  const headers={'X-Content-Type-Options':'nosniff','Referrer-Policy':'strict-origin-when-cross-origin','X-Frame-Options':'DENY','Permissions-Policy':'camera=(), microphone=(), geolocation=()','Content-Security-Policy':"default-src 'self'; script-src 'self' https://www.googletagmanager.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https://*.google-analytics.com; connect-src 'self' https://*.google-analytics.com https://*.analytics.google.com; font-src 'self'; object-src 'none'; base-uri 'self'; frame-ancestors 'none'; form-action 'self' mailto:"};
