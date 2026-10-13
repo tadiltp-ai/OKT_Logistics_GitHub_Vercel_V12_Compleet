@@ -12,9 +12,10 @@ export function createApp({env=process.env,mailFetch=fetch,now=Date.now}={}){
  const secret=env.FORM_TOKEN_SECRET||crypto.randomBytes(32), rates=new Map();
  const site=JSON.parse(fs.readFileSync(path.join(root,'content/site.json'),'utf8'));
  const redirects=prepareRedirects(JSON.parse(fs.readFileSync(path.join(root,'content/redirects.json'),'utf8')));
- const emailReady=!!(env.RESEND_API_KEY&&env.MAIL_FROM&&env.PRIVACY_READY==='true'&&(!env.VERCEL||(env.FORM_TOKEN_SECRET?.length>=32&&env.PUBLIC_ORIGIN)));
+ const configuredOrigin=env.SITE_ORIGIN||env.PUBLIC_ORIGIN;
+ const emailReady=!!(env.RESEND_API_KEY&&env.MAIL_FROM&&env.PRIVACY_READY==='true'&&(!env.VERCEL||(env.FORM_TOKEN_SECRET?.length>=32&&configuredOrigin)));
  if(!emailReady){
-  const missing=[!env.RESEND_API_KEY&&'RESEND_API_KEY',!env.MAIL_FROM&&'MAIL_FROM',env.PRIVACY_READY!=='true'&&'PRIVACY_READY',env.VERCEL&&!(env.FORM_TOKEN_SECRET?.length>=32)&&'FORM_TOKEN_SECRET (minimum 32 characters)',env.VERCEL&&!env.PUBLIC_ORIGIN&&'PUBLIC_ORIGIN'].filter(Boolean);
+  const missing=[!env.RESEND_API_KEY&&'RESEND_API_KEY',!env.MAIL_FROM&&'MAIL_FROM',env.PRIVACY_READY!=='true'&&'PRIVACY_READY',env.VERCEL&&!(env.FORM_TOKEN_SECRET?.length>=32)&&'FORM_TOKEN_SECRET (minimum 32 characters)',env.VERCEL&&!configuredOrigin&&'SITE_ORIGIN or PUBLIC_ORIGIN'].filter(Boolean);
   console.warn('Form mail configuration incomplete: '+missing.join(', '));
  }
  const sign=time=>time+'.'+crypto.createHmac('sha256',secret).update(String(time)).digest('hex');
@@ -29,7 +30,7 @@ export function createApp({env=process.env,mailFetch=fetch,now=Date.now}={}){
   if(pathname==='/api/config'&&req.method==='GET')return json(200,{emailReady,gaId:/^G-[A-Z0-9]+$/.test(env.GA4_ID||'')?env.GA4_ID:'',token:sign(now())});
   if(pathname==='/api/quote'){
    if(req.method!=='POST')return json(405,{error:'Gebruik het aanvraagformulier.'});
-   const allowedOrigin=env.PUBLIC_ORIGIN||(env.VERCEL?site.domain:`http://${req.headers.host}`);
+   const allowedOrigin=configuredOrigin||(env.VERCEL?site.domain:`http://${req.headers.host}`);
    if(req.headers.origin!==allowedOrigin)return json(403,{error:'Verstuur vanaf deze website.'});
    if(!req.headers['content-type']?.startsWith('application/json'))return json(415,{error:'Ongeldige aanvraag.'});
    const ip=req.socket.remoteAddress;const bucket=rates.get(ip)||{count:0,start:now()};
