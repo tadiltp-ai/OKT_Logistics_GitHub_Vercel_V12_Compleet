@@ -20,6 +20,7 @@ export function finishLanguages(root,pages,site){
  }
  for(const lang of ['en','de']){
   const data=JSON.parse(fs.readFileSync(path.join(root,'content/translations',lang+'.json'),'utf8'));
+  const privacyUpdates=JSON.parse(fs.readFileSync(path.join(root,'content/translations/privacy-updates.json'),'utf8'))[lang]||{};
   lastModified[lang]=data.lastModified||{};
   const translate=s=>data.strings[s]||s;
   const localize=value=>{
@@ -31,6 +32,8 @@ export function finishLanguages(root,pages,site){
   };
   for(const p of pages){
    const route=routes[lang][p.slug],url=site.domain+route;let h=data.pages[p.slug];if(!h)throw Error('Missing translation: '+lang+' '+p.slug);
+   const update=privacyUpdates[p.slug];
+   if(update){h=h.replace(/<main[\s>][\s\S]*?<\/main>/,update.main).replace(/<title>[\s\S]*?<\/title>/,'<title>'+esc(update.title)+'</title>').replace(/(<meta (?:name="description"|property="og:description") content=")[^"]*/g,'$1'+esc(update.description)).replace(/(<meta property="og:title" content=")[^"]*/g,'$1'+esc(update.title));lastModified[lang][p.slug]=update.lastModified;}
    h=h.replace(/<meta name="robots"[^>]*>/g,'').replace(/http:\/\/127\.0\.0\.1:8934/g,site.domain).replace(/href="\/nl\//g,'href="/');
    h=h.replace(/<span class="language-switch"[^>]*>[\s\S]*?<\/span>/,menu(p.slug,lang));
    h=h.replace(/\/site-(en|de)\.js\?v=[^"]+/g,(_,l)=>'/site-'+l+'.js?v='+version('site-'+l+'.js')).replace('href="/language-wrap.css"','href="/language-wrap.css?v='+version('language-wrap.css')+'"');
