@@ -13,6 +13,10 @@ test('Vercel artifact serves routes without building or writing at runtime',asyn
  assert.ok(!fs.existsSync(path.join(fn,'.env')));
  assert.ok(!fs.existsSync(path.join(output,'static/content')));
  assert.ok(fs.existsSync(path.join(output,'static/assets')));
+ // The artifact test must not inherit live mail credentials from the Vercel build.
+ const mailKeys=['RESEND_API_KEY','MAIL_FROM','PRIVACY_READY','FORM_TOKEN_SECRET','PUBLIC_ORIGIN','SITE_ORIGIN'];
+ const savedMailEnv=Object.fromEntries(mailKeys.map(k=>[k,process.env[k]]));
+ for(const key of mailKeys)delete process.env[key];
  const {default:handler}=await import(pathToFileURL(path.join(fn,'entry.mjs')));
  const server=http.createServer(handler);await new Promise(r=>server.listen(0,'127.0.0.1',r));
  const base='http://127.0.0.1:'+server.address().port;
@@ -31,5 +35,5 @@ test('Vercel artifact serves routes without building or writing at runtime',asyn
   }
   for(const route of ['/unknown/','/content/site.json','/.env','/tools/editor.html'])assert.equal((await fetch(base+route)).status,404);
   assert.equal((await fetch(base+'/api/config').then(r=>r.json())).emailReady,false);
- }finally{await new Promise(r=>server.close(r));}
+ }finally{await new Promise(r=>server.close(r));for(const key of mailKeys){if(savedMailEnv[key]===undefined)delete process.env[key];else process.env[key]=savedMailEnv[key];}}
 });
