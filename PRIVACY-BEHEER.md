@@ -12,7 +12,7 @@ Opdrachtdossiers: bepaal per gegevenscategorie de noodzakelijke termijn voor uit
 
 - Vercel: websitehosting en serverfunctie. Controleer dat het gebruikte account namens OKT Logistics BV is ingericht, dat de DPA van toepassing is en dat de internationale verwerking is beoordeeld. Bron: https://vercel.com/legal/dpa
 - Resend: afzender website.oktlogisticholland.com, verzendregio Ierland, daarnaast verwerking/opslag in de VS volgens de dienstverlener. De DPA is volgens Resend onderdeel van de serviceovereenkomst. Bewaar de toepasselijke versie bij de bedrijfsadministratie. Bronnen: https://resend.com/legal/dpa en https://resend.com/security/gdpr
-- Ontvangende mailbox aanvraag@okttrans.nl: leg de daadwerkelijke e-mailprovider, verwerkersafspraken, toegangsrechten, back-ups en bewaartermijnen vast. De provider van deze mailbox is nog niet vastgesteld in dit project.
+- Ontvangende mailbox aanvraag@okttrans.nl: Hostnet, door de eigenaar bevestigd op 13 oktober 2026. Beheer toegangsrechten, back-ups en verwijdering volgens de afgesproken termijn van 12 maanden; leg de toepasselijke Hostnet-verwerkersvoorwaarden bij de bedrijfsadministratie vast.
 - Google Analytics: optioneel en technisch achter toestemming. Activeer pas na vaststelling van de gekozen instellingen, bewaartermijnen, afspraken en bijpassende cookie-informatie. De websitebeschrijving claimt niet dat onbekende accountinstellingen zijn gecontroleerd.
 
 ## Toegang en verzoeken
