@@ -13,7 +13,7 @@ test('public robots policy points at canonical sitemap and protects API',()=>{
   assert.match(robots,/^Disallow:\s*\/api\/\s*$/m);
   assert.ok(robots.includes('Sitemap: '+site.domain+'/sitemap.xml'));
   for(const route of ['/','/koeltransport/','/vriestransport/','/contact/']){
-    assert.ok(!robots.includes('Disallow: '+route),'Public SEO route should not be globally disallowed: '+route);
+    assert.ok(!robots.split(/\r?\n/).some(line=>line.trim()==='Disallow: '+route),'Public SEO route should not be explicitly disallowed: '+route);
   }
 });
 
