@@ -61,6 +61,7 @@ export function finishSeo(root,pages,site){
   html=images(html);html=schemaUpdate(html,p,nlRoute(p.slug),'nl');
   html=assets(html);
   if(p.slug==='index'){
+   html=html.replace('</head>','<meta name="google-site-verification" content="2n3viZ8mFDW-5yY0E36uIQIlr7fhMzrVXgf5IvUZkdA"></head>');
    const hero=html.match(/<img[^>]*src="([^"]*homepage-lineage[^\"]*)"[^>]*>/)?.[0];
    if(hero){const attr=n=>hero.match(new RegExp('\\b'+n+'="([^"]*)"'))?.[1];html=html.replace('</head>',`<link rel="preload" as="image" href="${attr('src')}" imagesrcset="${attr('srcset')}" imagesizes="${attr('sizes')}" fetchpriority="high"></head>`);}
   }
