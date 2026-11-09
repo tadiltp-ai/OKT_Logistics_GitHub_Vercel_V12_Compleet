@@ -16,7 +16,7 @@ test('all 66 approved translations have live metadata, reciprocal languages and 
   if(!['hidden','draft'].includes(p.type))assert.doesNotMatch(h,/<meta name="robots" content="noindex/);
   for(const l of ['nl','en','de'])assert.ok(h.includes('hreflang="'+l+'" href="https://www.oktlogisticholland.com'+routes[l][slug]+'"'));
   const nl=fs.readFileSync(path.join(root,'public',slug+'.html'),'utf8');
-  assert.deepEqual([...h.matchAll(/name="([^"]+)"/g)].map(m=>m[1]).filter(n=>!['robots'].includes(n)).sort(),[...nl.matchAll(/name="([^"]+)"/g)].map(m=>m[1]).filter(n=>!['robots'].includes(n)).sort());
+  assert.deepEqual([...h.matchAll(/name="([^"]+)"/g)].map(m=>m[1]).filter(n=>!['robots','google-site-verification'].includes(n)).sort(),[...nl.matchAll(/name="([^"]+)"/g)].map(m=>m[1]).filter(n=>!['robots','google-site-verification'].includes(n)).sort());
   assert.ok(response.headers.get('content-security-policy').includes("script-src 'self'"));
  }
  for(const lang of ['de','en']){const r=await fetch(origin+'/'+lang,{redirect:'manual'});assert.equal(r.headers.get('location'),'/'+lang+'/');}
