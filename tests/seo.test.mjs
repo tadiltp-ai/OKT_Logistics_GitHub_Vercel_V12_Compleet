@@ -36,3 +36,23 @@ test('editorial dates are optional and agree with Article and sitemap',()=>{
   if(p.lastModified&&!['hidden','draft'].includes(p.type))assert.ok(sitemap.includes(`<lastmod>${p.lastModified}</lastmod>`));
  }
 });
+
+test('translated Article headlines and dates follow the published translation',()=>{
+ const routes=JSON.parse(fs.readFileSync(path.join(root,'tools/language-routes.json'),'utf8'));
+ const sitemap=fs.readFileSync(path.join(root,'public/sitemap.xml'),'utf8');
+ for(const lang of ['en','de']){
+  const data=JSON.parse(fs.readFileSync(path.join(root,'content/translations',lang+'.json'),'utf8'));
+  const updates=JSON.parse(fs.readFileSync(path.join(root,'content/translations/editorial-updates.json'),'utf8'))[lang]||{};
+  for(const [slug,route] of Object.entries(routes[lang])){
+   const html=fs.readFileSync(path.join(root,'public',route.slice(1,-1).replaceAll('/','--')+'.html'),'utf8');
+   const article=JSON.parse(html.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/)[1]).find(s=>s['@type']==='Article');
+   if(!article)continue;
+   assert.equal(article.headline,html.match(/<h1[^>]*>([\s\S]*?)<\/h1>/)[1],route);
+   const modified=updates[slug]?.lastModified||data.lastModified?.[slug];
+   if(modified){
+    assert.equal(article.dateModified,modified,route);
+    assert.ok(sitemap.includes(`<loc>https://www.oktlogisticholland.com${route}</loc><lastmod>${modified}</lastmod>`));
+   }
+  }
+ }
+});
