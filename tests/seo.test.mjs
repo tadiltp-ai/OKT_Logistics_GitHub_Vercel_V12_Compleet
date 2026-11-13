@@ -37,7 +37,7 @@ test('editorial dates are optional and agree with Article and sitemap',()=>{
  }
 });
 
-test('translated Article headlines and dates follow the published translation',()=>{
+test('translated structured data follows visible headings and editorial dates',()=>{
  const routes=JSON.parse(fs.readFileSync(path.join(root,'tools/language-routes.json'),'utf8'));
  const sitemap=fs.readFileSync(path.join(root,'public/sitemap.xml'),'utf8');
  for(const lang of ['en','de']){
@@ -45,7 +45,10 @@ test('translated Article headlines and dates follow the published translation',(
   const updates=JSON.parse(fs.readFileSync(path.join(root,'content/translations/editorial-updates.json'),'utf8'))[lang]||{};
   for(const [slug,route] of Object.entries(routes[lang])){
    const html=fs.readFileSync(path.join(root,'public',route.slice(1,-1).replaceAll('/','--')+'.html'),'utf8');
-   const article=JSON.parse(html.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/)[1]).find(s=>s['@type']==='Article');
+   const schemas=JSON.parse(html.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/)[1]);
+   const service=schemas.find(s=>s['@type']==='Service');
+   if(service)assert.equal(service.name,html.match(/<h1[^>]*>([\s\S]*?)<\/h1>/)[1],route);
+   const article=schemas.find(s=>s['@type']==='Article');
    if(!article)continue;
    assert.equal(article.headline,html.match(/<h1[^>]*>([\s\S]*?)<\/h1>/)[1],route);
    const modified=updates[slug]?.lastModified||data.lastModified?.[slug];

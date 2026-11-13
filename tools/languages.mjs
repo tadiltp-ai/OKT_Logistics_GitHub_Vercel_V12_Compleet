@@ -47,7 +47,7 @@ export function finishLanguages(root,pages,site){
     const v=localize(s);
     if(v['@type']==='WebSite'){v.url=site.domain+'/';v.inLanguage=['nl-NL','en-GB','de-DE'];}
     else if(['WebPage','AboutPage','ContactPage','Article'].includes(v['@type'])){v.inLanguage=lang==='de'?'de-DE':'en-GB';v.description=description;if(v.name)v.name=title;if(v['@type']==='Article'){v.headline=decode(h.match(/<h1[^>]*>([\s\S]*?)<\/h1>/)[1]);if(lastModified[lang][p.slug])v.dateModified=lastModified[lang][p.slug];}}
-    if(v['@type']==='Service')v.description=description;
+    if(v['@type']==='Service'){v.description=description;v.name=decode(h.match(/<h1[^>]*>([\s\S]*?)<\/h1>/)[1]);}
     return v;
    });
    const questions=[...h.matchAll(/<details[^>]*>\s*<summary[^>]*>([\s\S]*?)<\/summary>([\s\S]*?)<\/details>/g)].map(m=>({'@type':'Question',name:decode(m[1]),acceptedAnswer:{'@type':'Answer',text:decode(m[2])}}));
